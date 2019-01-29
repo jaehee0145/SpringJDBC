@@ -30,7 +30,7 @@ public class BoardController {
 
     @GetMapping("/view")
     public String view(
-            @RequestParam(name = "id", required = false) Long id, Model model){
+            @RequestParam(name = "id", required = false) Long id, Model model) {
         Board board = boardService.getBoard(id);
         model.addAttribute("board", board);
         return "view";
@@ -55,16 +55,28 @@ public class BoardController {
         board.setUserId(user.getId());
         board.setTitle(title);
         board.setContent(content);
-        board.setNickname(user.getNickname());
-
-        System.out.println(user.getId());
-        System.out.println(title);
 
         boardService.addBoard(board);
         return "redirect:/board/list";
     }
 
+    @GetMapping("/modify")
+    public String modifyform() {
+        return "modifyform";
+    }
 
+    @PostMapping("/board/modify")
+    public String modify(
+            @RequestParam(name = "id") Long id,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "content") String content,
+            HttpSession session) {
+        Board board = boardService.getBoard(id);
+        board.setTitle(title);
+        board.setContent(content);
+
+        return "redirect:/board/list";
+    }
 
 
 }

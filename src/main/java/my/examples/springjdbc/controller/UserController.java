@@ -46,15 +46,18 @@ public class UserController {
         if(user.getName()==null || user.getName().length()<=1)
             throw new IllegalArgumentException("이름을 입력하세요.");
 
+        System.out.println("join test");
+        System.out.println(user.getName());
+
         userService.addUser(user);
 
         return "redirect:/list";
     }
 
-    @GetMapping("/loginform")
-    public String loginform(){
-        return "loginform";
-    }
+//    @GetMapping("/loginform")
+//    public String loginform(){
+//        return "loginform";
+//    }
 
     @PostMapping("/login")
     public String login(@RequestParam (name = "email") String email,

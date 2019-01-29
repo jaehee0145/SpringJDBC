@@ -38,7 +38,7 @@
 
     <button type="button" class="btn btn-success"><a href="/board/list">목록</a></button>
     <div class="btn-group pull-right">
-        <button type="button" class="btn btn-warning"><a href="/board/modify?id=${board.id}">수정</a></button>
+        <button type="button" class="btn btn-warning"><a href="/modify?id=${board.id}">수정</a></button>
         <button type="button" class="btn btn-danger"><a href="/delete?id=${board.id}">삭제</a></button>
     </div>
 
