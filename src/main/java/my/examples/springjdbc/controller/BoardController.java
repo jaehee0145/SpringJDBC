@@ -35,7 +35,6 @@ public class BoardController {
         model.addAttribute("board", board);
         return "view";
 
-
     }
 
     @GetMapping("/write")
@@ -60,8 +59,20 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    @GetMapping("/delete")
+    public String delete(
+            @RequestParam(name = "id", required = false) Long id) {
+        boardService.deleteBoard(id);
+
+        return "redirect:/board/list";
+    }
+
+
     @GetMapping("/modify")
-    public String modifyform() {
+    public String modifyform(
+            @RequestParam(name = "id") Long id, Model model) {
+        Board board = boardService.getBoard(id);
+        model.addAttribute("board", board);
         return "modifyform";
     }
 
@@ -71,9 +82,13 @@ public class BoardController {
             @RequestParam(name = "title") String title,
             @RequestParam(name = "content") String content,
             HttpSession session) {
+        User user = (User) session.getAttribute("logininfo");
         Board board = boardService.getBoard(id);
+        board.setUserId(user.getId());
         board.setTitle(title);
         board.setContent(content);
+
+        boardService.modifyBoard(id, title, content);
 
         return "redirect:/board/list";
     }

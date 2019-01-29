@@ -66,7 +66,6 @@ public class BoardDaoImpl implements BoardDao {
     @Override
     public Long getLastInsertId() {
         Map emptyMap = Collections.emptyMap();
-
         Long lastId = jdbc.queryForObject(SELECT_LAST_INSERT_ID, emptyMap, Long.class);
         return lastId;
     }
@@ -81,11 +80,25 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public void deleteBoard(Long id) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        jdbc.update(DELETE, paramMap);
+    }
 
+    @Override
+    public void modifyBoard(Long id, String title, String content) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        paramMap.put("title", title);
+        paramMap.put("content", content);
+        jdbc.update(MODIFY, paramMap);
     }
 
     @Override
     public void updateReadCount(long id) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        jdbc.update(UPDATE, paramMap);
 
     }
 

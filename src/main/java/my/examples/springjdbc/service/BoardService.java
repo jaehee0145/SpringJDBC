@@ -11,4 +11,8 @@ public interface BoardService {
     public Board getBoard(Long id);
 
     Board addBoard(Board board);
+
+    void deleteBoard(Long id);
+
+    void modifyBoard(Long id, String title, String content);
 }

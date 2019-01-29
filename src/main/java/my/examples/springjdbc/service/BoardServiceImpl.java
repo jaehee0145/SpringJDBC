@@ -25,9 +25,17 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Board getBoard(Long id) {
+        boardDao.updateReadCount(id);
         return boardDao.getBoard(id);
+    }
+
+    @Override
+    @Transactional
+    public void modifyBoard(Long id, String title, String content) {
+        boardDao.modifyBoard(id, title, content);
+
     }
 
     @Override
@@ -41,5 +49,10 @@ public class BoardServiceImpl implements BoardService{
         boardDao.updateLastInsertId(lastInsertId);
 
         return board;
+    }
+
+    @Override
+    public void deleteBoard(Long id) {
+        boardDao.deleteBoard(id);
     }
 }

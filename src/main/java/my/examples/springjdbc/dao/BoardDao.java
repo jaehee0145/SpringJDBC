@@ -26,4 +26,6 @@ public interface BoardDao {
     public int getBoardCount();
 
     List<Board> selectByPage(int start, int limit);
+
+    void modifyBoard(Long id, String title, String content);
 }
