@@ -72,7 +72,7 @@ public class BoardController {
     @GetMapping("/modify")
     public String modifyform(
             @RequestParam(name = "id", required = false) Long id, Model model) {
-        Board board = boardService.getBoard(id);
+        Board board = boardService.getBoardForModify(id);
         model.addAttribute("board", board);
         return "modifyform";
     }

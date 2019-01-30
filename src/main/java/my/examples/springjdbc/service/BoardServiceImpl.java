@@ -33,6 +33,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     @Transactional
+    public Board getBoardForModify(Long id) {
+        return boardDao.getBoard(id);
+    }
+
+    @Override
+    @Transactional
     public void modifyBoard(Long id, String title, String content) {
         boardDao.modifyBoard(id, title, content);
     }
