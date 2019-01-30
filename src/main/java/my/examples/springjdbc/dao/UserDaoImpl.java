@@ -82,7 +82,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public Long addUser(User user) {
+	public void addUser(User user) {
 
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("name", user.getName());
@@ -90,8 +90,9 @@ public class UserDaoImpl implements UserDao{
 		paramMap.put("email", user.getEmail());
 		paramMap.put("passwd", user.getPasswd());
 		paramMap.put("regdate", user.getRegdate());
-		Number number = simpleJdbcInsert.executeAndReturnKey(paramMap);
-		return number.longValue();
+//		Number number = simpleJdbcInsert.executeAndReturnKey(paramMap);
+//		return number.longValue();
+		jdbc.update(INSERT,paramMap);
 	}
 
 	@Override

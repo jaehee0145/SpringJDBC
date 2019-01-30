@@ -27,9 +27,9 @@
 <div class="container">
     <div class="panel panel-default">
         <%--<c:forEach items="${requestScope.list}" var="board">--%>
-        <input type="hidden" name="id" id = "id" value="${board.id}" />
-        <div class="panel-heading">제목     ${board.title} </div>
-        <div class="panel-heading">작성자     ${board.nickname} </div>
+        <input type="hidden" name="id" id="id" value="${board.id}"/>
+        <div class="panel-heading">제목 ${board.title} </div>
+        <div class="panel-heading">작성자 ${board.nickname} </div>
         <div class="panel-heading"> ${board.regdate} </div>
         <div class="panel-body"> ${board.content} </div>
         <%--</c:forEach>--%>
@@ -37,10 +37,12 @@
 
 
     <button type="button" class="btn btn-success"><a href="/board/list">목록</a></button>
-    <div class="btn-group pull-right">
-        <button type="button" class="btn btn-warning"><a href="/modify?id=${board.id}">수정</a></button>
-        <button type="button" class="btn btn-danger"><a href="/delete?id=${board.id}">삭제</a></button>
-    </div>
+    <c:if test="${sessionScope.logininfo.id==board.userId}">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-warning"><a href="/modify?id=${board.id}">수정</a></button>
+            <button type="button" class="btn btn-danger"><a href="/delete?id=${board.id}">삭제</a></button>
+        </div>
+    </c:if>
 
 </div>
 <br>

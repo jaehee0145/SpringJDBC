@@ -35,7 +35,6 @@ public class BoardServiceImpl implements BoardService{
     @Transactional
     public void modifyBoard(Long id, String title, String content) {
         boardDao.modifyBoard(id, title, content);
-
     }
 
     @Override

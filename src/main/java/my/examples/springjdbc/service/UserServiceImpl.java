@@ -24,10 +24,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User addUser(User user) {
-        Long id = userDao.addUser(user);
-//        if(1==1)
-//            throw new RuntimeException("-_-;");
-        user.setId(id);
+
+//        Long id = userDao.addUser(user);
+//        user.setId(id);
+            userDao.addUser(user);
+
         return user;
     }
 

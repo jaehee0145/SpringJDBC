@@ -18,7 +18,7 @@ public class BoardDaoSqls {
     public static final String UPDATE_GROUP_SEQ_GT =
             "update board set group_seq = group_seq + 1 where group_no = :groupNo and group_seq > :groupSeq";
 
-    public static final String MODIFY = "UPDATE board SET title=?, content=? where id =?";
+    public static final String MODIFY = "UPDATE board SET title=:title, content=:content where id =:id";
 
 
 }

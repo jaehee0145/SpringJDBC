@@ -34,7 +34,6 @@ public class BoardController {
         Board board = boardService.getBoard(id);
         model.addAttribute("board", board);
         return "view";
-
     }
 
     @GetMapping("/write")
@@ -44,6 +43,7 @@ public class BoardController {
 
     @PostMapping("/board/write")
     public String write(
+            @RequestParam(name = "nickname") String nickname,
             @RequestParam(name = "title") String title,
             @RequestParam(name = "content") String content,
             HttpSession session) {
@@ -52,6 +52,7 @@ public class BoardController {
         User user = (User) session.getAttribute("logininfo");
 
         board.setUserId(user.getId());
+        board.setNickname(nickname);
         board.setTitle(title);
         board.setContent(content);
 
@@ -70,7 +71,7 @@ public class BoardController {
 
     @GetMapping("/modify")
     public String modifyform(
-            @RequestParam(name = "id") Long id, Model model) {
+            @RequestParam(name = "id", required = false) Long id, Model model) {
         Board board = boardService.getBoard(id);
         model.addAttribute("board", board);
         return "modifyform";
@@ -81,14 +82,16 @@ public class BoardController {
             @RequestParam(name = "id") Long id,
             @RequestParam(name = "title") String title,
             @RequestParam(name = "content") String content,
-            HttpSession session) {
-        User user = (User) session.getAttribute("logininfo");
-        Board board = boardService.getBoard(id);
-        board.setUserId(user.getId());
-        board.setTitle(title);
-        board.setContent(content);
+            HttpSession session, Model model) {
+//        User user = (User) session.getAttribute("logininfo");
+//        Board board = boardService.getBoard(id);
+//
+//        board.setUserId(user.getId());
+//        board.setTitle(title);
+//        board.setContent(content);
 
         boardService.modifyBoard(id, title, content);
+//        model.addAttribute("board", board);
 
         return "redirect:/board/list";
     }

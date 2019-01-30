@@ -99,7 +99,6 @@ public class BoardDaoImpl implements BoardDao {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         jdbc.update(UPDATE, paramMap);
-
     }
 
     @Override
